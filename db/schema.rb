@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_08_29_183740) do
     t.string "selection"
     t.string "question_id"
     t.string "student_id"
+    t.integer "points_awarded"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
