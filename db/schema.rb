@@ -31,14 +31,6 @@ ActiveRecord::Schema.define(version: 2020_08_29_183740) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "question_answers", force: :cascade do |t|
-    t.string "answer"
-    t.string "question_id"
-    t.string "student_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "questions", force: :cascade do |t|
     t.string "query"
     t.string "option_a"
@@ -46,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_08_29_183740) do
     t.string "option_c"
     t.string "option_d"
     t.string "correct_option"
+    t.integer "quiz_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

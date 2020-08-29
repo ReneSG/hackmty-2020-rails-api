@@ -7,7 +7,7 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
       t.string :option_c
       t.string :option_d
       t.string :correct_option
-      t.string :quiz_id
+      t.integer :quiz_id
 
       t.timestamps
     end
