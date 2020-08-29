@@ -8,6 +8,7 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
       t.string :option_d
       t.string :correct_option
       t.integer :quiz_id
+      t.integer :started_at_in_epoch
 
       t.timestamps
     end

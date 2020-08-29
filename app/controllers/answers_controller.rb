@@ -19,6 +19,12 @@ class AnswersController < ApplicationController
   def compute_answer
     correct_answer = @answer.question.correct_option
     #TODO: Compute real points based on timestamps.
-    @answer.points_awarded = correct_answer == @answer.selection ? 1 : 0
+    @answer.points_awarded = correct_answer == @answer.selection ? points_awarded : 0
+  end
+
+  def points_awarded
+    answer_sent_at = DateTime.parse(params[:timestamp])
+    quiz_started_at = @answer.question.started_at_in_epoch
+    return 1000 - (quiz_started_at - answer_sent_at)*20
   end
 end

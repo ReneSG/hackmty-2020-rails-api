@@ -22,7 +22,8 @@ class QuizzesController < ApplicationController
 
   private
   def quiz_params
-    params.permit(:name, :professor_id, :id)
+    params.permit(:name, :professor_id, :id,
+                 questions_attributes: [:id, :query, :option_a, :option_b, :option_c, :option_d, :correct_option])
   end
 
   def set_quiz
