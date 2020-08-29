@@ -1,4 +1,6 @@
 class QuizzesController < ApplicationController
+  before_action :set_quiz, only: [:show]
+
   def create
     @quiz = Quiz.create(quiz_params)
     if @quiz.save
@@ -14,9 +16,16 @@ class QuizzesController < ApplicationController
     render json: @quizzes.to_json
   end
 
-  private
+  def show
+    render json: @quiz.to_json(include: [:questions])
+  end
 
+  private
   def quiz_params
-    params.permit(:name, :professor_id)
+    params.permit(:name, :professor_id, :id)
+  end
+
+  def set_quiz
+    @quiz = Quiz.find(quiz_params[:id])
   end
 end
