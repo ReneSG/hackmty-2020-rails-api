@@ -2,9 +2,10 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.create(answer_params)
+    @answer.student = Student.find_by(identifier: params[:student_identifier])
     compute_answer
     if @answer.save
-      render json: @answer.json, status: :create
+      render json: @answer.to_json, status: :created
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
@@ -12,7 +13,7 @@ class AnswersController < ApplicationController
 
   private
   def answer_params
-    params.permit(:id, :selection, :question_id, :student_id)
+    params.permit(:id, :selection, :question_id)
   end
 
   def compute_answer
