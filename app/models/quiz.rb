@@ -15,6 +15,7 @@ class Quiz < ApplicationRecord
   end
 
   def students
+    return {} if self.quiz_sessions.count == 0
     self.quiz_sessions.active.last.students
   end
 end

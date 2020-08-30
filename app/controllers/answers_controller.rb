@@ -2,8 +2,9 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.create(answer_params)
-    @answer.question = Quiz.find(params[:quiz_id]).active_question
-    @answer.student = Student.find_by(identifier: params[:student_identifier])
+    @quiz = Quiz.find(params[:quiz_id])
+    @answer.question = @quiz.active_question
+    @answer.student = @quiz.quiz_sessions.active.last.students.find_by(identifier: params[:student_identifier])
     compute_answer
     if @answer.save
       render json: @answer.to_json, status: :created
