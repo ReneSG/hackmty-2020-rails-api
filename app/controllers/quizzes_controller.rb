@@ -21,6 +21,7 @@ class QuizzesController < ApplicationController
 
   def leaderboard
     @students = @quiz.students.order(total_points: :desc)
+    @quiz.questions.update_all(status: :archived)
     render json: @students, status: :ok
   end
 
