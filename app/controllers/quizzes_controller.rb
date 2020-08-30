@@ -20,7 +20,7 @@ class QuizzesController < ApplicationController
   end
 
   def leaderboard
-    @students = @quiz.quiz_sessions.active.first.students.order(total_points: :desc)
+    @students = @quiz.quiz_sessions.active.last.students.order(total_points: :desc)
     @quiz.questions.active.update_all(status: :done)
     render json: @students, status: :ok
   end
@@ -29,6 +29,7 @@ class QuizzesController < ApplicationController
     next_q = @quiz.next_question
 
     if next_q.nil?
+      quiz.quiz_sessions.active.last.update(status: "done")
       render json: {}, status: 204
     else
       next_q.update(started_at_in_epoch: Time.now.to_i, status: "active")

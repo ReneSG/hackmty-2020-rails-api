@@ -15,6 +15,6 @@ class Quiz < ApplicationRecord
   end
 
   def students
-    self.quiz_sessions.active.first.students
+    self.quiz_sessions.active.last.students
   end
 end
