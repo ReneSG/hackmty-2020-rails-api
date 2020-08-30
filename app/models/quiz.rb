@@ -8,4 +8,9 @@ class Quiz < ApplicationRecord
   def active_question
     self.questions.active.first
   end
+
+  def next_question
+    return nil if self.questions.pending.count == 0
+    return self.questions.pending.first
+  end
 end
