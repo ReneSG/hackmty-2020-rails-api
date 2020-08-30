@@ -10,14 +10,13 @@ class QuizzesController < ApplicationController
     end
   end
 
-
   def index
     @quizzes = Quiz.all
     render json: @quizzes.to_json
   end
 
   def show
-    render json: @quiz.to_json(include: [:questions])
+    render json: @quiz.to_json(include: [:questions, :students])
   end
 
   private
