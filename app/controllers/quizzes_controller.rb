@@ -32,7 +32,7 @@ class QuizzesController < ApplicationController
       render json: {}, status: 204
     else
       next_q.update(started_at_in_epoch: Time.now.to_i, status: "active")
-      render json: @quiz.next_question
+      render json: next_q
     end
   end
 
