@@ -12,15 +12,15 @@ class QuizzesController < ApplicationController
 
   def index
     @quizzes = Quiz.all
-    render json: @quizzes.to_json
+    render json: @quizzes.to_json(include: [:quiz_sessions])
   end
 
   def show
-    render json: @quiz.to_json(include: [:questions, :students, :professor])
+    render json: @quiz.to_json(include: [:questions, :professor, :quiz_sessions], methods: :students)
   end
 
   def leaderboard
-    @students = @quiz.students.order(total_points: :desc)
+    @students = @quiz.quiz_sessions.active.first.students.order(total_points: :desc)
     @quiz.questions.active.update_all(status: :done)
     render json: @students, status: :ok
   end
@@ -38,7 +38,7 @@ class QuizzesController < ApplicationController
 
   def start
     @quiz.questions.update_all(status: "pending")
-    @quiz.students.destroy_all
+    @quiz.quiz_sessions.create(status: "active")
     render json: {}, status: 204
   end
 

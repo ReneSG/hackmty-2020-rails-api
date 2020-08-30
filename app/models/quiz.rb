@@ -1,7 +1,7 @@
 class Quiz < ApplicationRecord
   belongs_to :professor
   has_many :questions
-  has_many :students
+  has_many :quiz_sessions
 
   accepts_nested_attributes_for :questions
 
@@ -12,5 +12,9 @@ class Quiz < ApplicationRecord
   def next_question
     return nil if self.questions.pending.count == 0
     return self.questions.pending.first
+  end
+
+  def students
+    self.quiz_sessions.active.first.students
   end
 end

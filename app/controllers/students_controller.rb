@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.create(student_params)
+    @student.quiz_session = Quiz.find(params[:quiz_id]).quiz_sessions.active.first
     @student.total_points = 0
     @student.save
     render json: @student.to_json
@@ -9,6 +10,6 @@ class StudentsController < ApplicationController
 
   private
   def student_params
-    params.permit(:username, :identifier, :id, :quiz_id)
+    params.permit(:username, :identifier, :id)
   end
 end
