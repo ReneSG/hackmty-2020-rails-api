@@ -27,6 +27,8 @@ class AnswersController < ApplicationController
   def points_awarded
     answer_sent_at = params[:timestamp]
     quiz_started_at = @answer.question.started_at_in_epoch
-    return 1000 - (answer_sent_at.to_i - quiz_started_at.to_i)*10
+    delta = answer_sent_at.to_i - quiz_started_at.to_i
+    return 0 if delta > 30 # Ignore if answer was submitted after 30 seconds.
+    return 1000 - (delta)*10
   end
 end
