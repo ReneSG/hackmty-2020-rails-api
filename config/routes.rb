@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :students
   resources :answers
   resources :questions
+
+  get 'quiz_sessions/:id/results', to: 'quiz_sessions#results'
 end
