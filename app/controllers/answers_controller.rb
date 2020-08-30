@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
     correct_answer = @answer.question.correct_option
     #TODO: Compute real points based on timestamps.
     @answer.points_awarded = correct_answer == @answer.selection ? points_awarded : 0
-    @answer.student.total_points += @answer.points_awarded
+    @answer.student.increase_total_points(@answer.points_awarded)
   end
 
   def points_awarded
