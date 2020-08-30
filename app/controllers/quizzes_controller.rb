@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show]
+  before_action :set_quiz, only: [:show, :leaderboard]
 
   def create
     @quiz = Quiz.create(quiz_params)
@@ -16,7 +16,12 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    render json: @quiz.to_json(include: [:questions, :students])
+    render json: @quiz.to_json(include: [:questions, :students, :professor])
+  end
+
+  def leaderboard
+    @students = @quiz.students.order(total_points: :desc)
+    render json: @students, status: :ok
   end
 
   private
