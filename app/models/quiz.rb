@@ -5,4 +5,7 @@ class Quiz < ApplicationRecord
 
   accepts_nested_attributes_for :questions
 
+  def active_question
+    self.questions.active.first
+  end
 end

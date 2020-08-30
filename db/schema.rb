@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_08_29_183740) do
     t.string "correct_option"
     t.integer "quiz_id"
     t.integer "started_at_in_epoch"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_08_29_183740) do
     t.string "username"
     t.string "identifier"
     t.integer "quiz_id"
+    t.integer "total_points"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

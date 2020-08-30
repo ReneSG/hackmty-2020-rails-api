@@ -4,6 +4,7 @@ class CreateStudents < ActiveRecord::Migration[6.0]
       t.string :username
       t.string :identifier
       t.integer :quiz_id
+      t.integer :total_points
 
       t.timestamps
     end

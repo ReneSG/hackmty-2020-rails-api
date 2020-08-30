@@ -2,6 +2,8 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.create(student_params)
+    @student.total_points = 0
+    @student.save
     render json: @student.to_json
   end
 
